@@ -1,8 +1,8 @@
 # LEDIT
 
 A simple text editor written in pure Lua.
-Partially an experiment in making an editor primarily controlled by
-the left hand.  I'm left-handed, so this makes sense.
+Partially an experiment in making an editor primarily controlled by the left
+hand.  I'm left-handed, so this makes sense.
 
 A few keybinds operate on a "cut buffer." Every cut/copy operation appends to
 this buffer, so `X` and then `10` is equivalent to `x` 10 times.
