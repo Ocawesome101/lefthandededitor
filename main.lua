@@ -32,6 +32,7 @@ end
 
 if arg[1] then
   st.fname = arg[1]
+  st.stat = " " .. arg[1]
   st.save = true
   local h = io.open(arg[1], "r")
   if h then
@@ -291,6 +292,8 @@ local function getinput()
   end
 end
 
+termio.setAlternateBuffer()
+local ok, err = pcall(function()
 while true do
   if #buf[#buf] > 0 then
     buf[#buf+1] = ""
@@ -300,4 +303,7 @@ while true do
   draw()
   getinput()
 end
+end)
+termio.clearAlternateBuffer()
+if not ok and err then io.stderr:write(err, "\n") end
 

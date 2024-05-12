@@ -67,6 +67,14 @@ function lib.cursorVisible(vis)
   getHandler().cursorVisible(vis)
 end
 
+function lib.setAlternateBuffer()
+  getHandler().setAlternateBuffer()
+end
+
+function lib.clearAlternateBuffer()
+  getHandler().clearAlternateBuffer()
+end
+
 ----------------- Keyboard input -----------------
 local patterns = {}
 

@@ -25,6 +25,14 @@ function handler.setRaw(_raw)
   end
 end
 
+function handler.setAlternateBuffer()
+  io.write("\27[?1049h\27[22;0;0t")
+end
+
+function handler.clearAlternateBuffer()
+  io.write("\27[?1049l\27[23;0;0t\n")
+end
+
 function handler.cursorVisible(_)
 end
 
@@ -32,3 +40,4 @@ function handler.ttyIn() return isatty(0) == 1 end
 function handler.ttyOut() return isatty(1) == 1 end
 
 return handler
+
