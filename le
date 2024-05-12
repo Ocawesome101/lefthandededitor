@@ -1,0 +1,8 @@
+#!/bin/env lua
+
+local INSTALL_DIR = os.getenv("LHE_DIR") or (os.getenv("HOME").."/.local/share/le")
+
+package.path = package.path .. ";"..INSTALL_DIR.."/?.lua"
+package.path = package.path .. ";"..INSTALL_DIR.."/?/init.lua"
+
+assert(loadfile(INSTALL_DIR.."/main.lua"))(...)
