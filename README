@@ -1,6 +1,7 @@
-# LEDIT
+# LeftHandedEditor
 
 A simple text editor written in pure Lua.
+
 Partially an experiment in making an editor primarily controlled by the left
 hand.  I'm left-handed, so this makes sense.
 
