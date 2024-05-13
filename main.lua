@@ -221,6 +221,7 @@ local function mvmt(k)
       st.stat = "unsaved! t=save"
     else
       io.write("\27[2J\27[1;1H")
+      termio.clearAlternateBuffer()
       io.flush()
       os.exit()
     end
@@ -230,6 +231,7 @@ local function mvmt(k)
       st.quit = true
     else
       io.write("\27[2J\27[1;1H")
+      termio.clearAlternateBuffer()
       io.flush()
       os.exit()
     end
