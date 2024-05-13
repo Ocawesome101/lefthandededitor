@@ -30,7 +30,7 @@ function handler.setAlternateBuffer()
 end
 
 function handler.clearAlternateBuffer()
-  io.write("\27[?1049l\27[23;0;0t\n")
+  io.write("\27[?1049l\27[23;0;0t")
 end
 
 function handler.cursorVisible(_)

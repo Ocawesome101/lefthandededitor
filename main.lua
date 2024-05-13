@@ -1,6 +1,7 @@
 #!/usr/bin/env lua
 
 local termio = require("termio")
+local syntax = require("syntax")
 
 local w, h = termio.getTermSize()
 local buf = {}
@@ -16,9 +17,10 @@ local function draw()
       drawn[i] = true
       termio.setCursor(1, i)
       if buf[i+st.scroll] then
-        io.write("\27[2K",buf[i+st.scroll]:sub(1+st.hscroll,w+st.hscroll))
+        io.write("\27[2K",
+          syntax.highlight(buf[i+st.scroll], 1+st.hscroll, w+st.hscroll))
       else
-        io.write("\27[2K~")
+        io.write("\27[2K\27[94m~\27[37m")
       end
     end
   end
@@ -32,6 +34,7 @@ end
 
 if arg[1] then
   st.fname = arg[1]
+  syntax.setHighlightFrom(arg[1])
   st.stat = " " .. arg[1]
   st.save = true
   local h = io.open(arg[1], "r")
@@ -151,6 +154,7 @@ end
 local function save()
   if #st.fname == 0 then st.fname = prompt("fname? ", true) or st.fname end
   if #st.fname > 0 then
+    syntax.setHighlightFrom(st.fname)
     local h, err = io.open(st.fname, "w")
     if h then
       for i=1, #buf do
@@ -216,6 +220,15 @@ local function mvmt(k)
     st.scroll = math.min(#buf-h, st.scroll + 5)
     if st.line < st.scroll then st.line = st.line + 5 end
     clear()
+  elseif k == "u" then
+    local old = buf[st.line]
+    buf[st.line] = buf[st.line]:gsub("^  ", "")
+    drawn[st.line-st.scroll] = false
+    st.col = st.col + (#buf[st.line] - #old)
+  elseif k == "o" then
+    buf[st.line] = "  " .. buf[st.line]
+    drawn[st.line-st.scroll] = false
+    st.col = st.col + 2
   elseif k == "q" then
     if not st.save then
       st.stat = "unsaved! t=save"
