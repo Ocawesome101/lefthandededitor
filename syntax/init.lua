@@ -20,7 +20,7 @@ end
 local SYNTAX = os.getenv("HOME").."/.local/share/le/syntax/?.lua"
 
 function M.setHighlightFrom(fname)
-  local ext = fname:match("%.(.+)$")
+  local ext = fname:match("%.([^%.]+)$")
   if not ext then
     return
   end
