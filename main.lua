@@ -35,7 +35,7 @@ end
 if arg[1] then
   st.fname = arg[1]
   syntax.setHighlightFrom(arg[1])
-  st.stat = " " .. arg[1]
+  st.stat = " " .. (arg[1]):sub(-(w-20))
   st.save = true
   local h = io.open(arg[1], "r")
   if h then
@@ -264,6 +264,7 @@ local function mvmt(k)
   elseif k == "p" then
     local text = buf[st.line]:sub(st.col)
     buf[st.line] = buf[st.line]:sub(1, st.col-1)
+    drawn[st.line-st.scroll] = false
     after(text)
   elseif k == "r" then
     st.line = prompt("nline? ") or st.line

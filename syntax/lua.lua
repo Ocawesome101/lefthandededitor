@@ -3,7 +3,7 @@
 local classes = {
   {name = "whitespace", "^[ \t\r\f\n\v]*$"},
   {name = "number", "^[0-9]+$", "^0x[0-9a-fA-F]+$"},
-  {name = "word", "^[a-zA-Z0-9]+$"},
+  {name = "word", "^[a-zA-Z0-9_]+$"},
   {name = "parens", "^[()]$"},
   {name = "special", "^[=%-%+%*&%^%%#~|%[%](){};,%.:<>]+$"},
 }
@@ -31,7 +31,8 @@ local keywords = {
     {
       color = 96,
       "string", "table", "coroutine", "require", "loadfile", "dofile", "load",
-      "utf8", "io", "package",
+      "utf8", "io", "package", "print", "assert", "_G", "tostring", "tonumber",
+      "rawget", "rawset", "error", "pcall", "xpcall"
     },
   },
 }
