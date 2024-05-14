@@ -84,7 +84,7 @@ return function(line)
     if c == "\255" then
       word = word .. c
     elseif c:match("[\"']") and (str == c or not str) then
-      if str == c and (word:sub(-1) ~= "\\" and word:sub(-2) ~= "\\\\") then
+      if str == c and (word:sub(-1) ~= "\\" or word:sub(-2) == "\\\\") then
         word = word .. c
         str = false
         out = out .. procword(word, {name="string"})
